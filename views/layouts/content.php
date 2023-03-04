@@ -1,6 +1,7 @@
 <?php
 /* @var $content string */
 
+use hail812\adminlte\widgets\FlashAlert;
 use yii\bootstrap4\Breadcrumbs;
 ?>
 <div class="content-wrapper">
@@ -26,6 +27,7 @@ use yii\bootstrap4\Breadcrumbs;
 
     <!-- Main content -->
     <div class="content">
+    <?= FlashAlert::widget(); ?>
         <?= $content ?><!-- /.container-fluid -->
     </div>
     <!-- /.content -->

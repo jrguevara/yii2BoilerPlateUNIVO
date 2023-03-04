@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\TblCategorias;
 use app\models\CategoriasSearch;
+use Exception;
+use app\controllers\CoreController;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -71,14 +73,24 @@ class CategoriasController extends Controller
         $model = new TblCategorias();
 
         if ($model->load($this->request->post())) {
-            $model->fecha_ing = date('Y-m-d H:i:s');
-            $model->fecha_mod = date('Y-m-d H:i:s');
-            $model->visible = 1;
-            $model->id_usuario = Yii::$app->user->identity->id;
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+                $model->fecha_ing = date('Y-m-d H:i:s');
+                $model->fecha_mod = date('Y-m-d H:i:s');
+                $model->visible = 1;
+                //$model->id_usuario = 5;
+                $model->id_usuario = Yii::$app->user->identity->id;
 
-            if (!$model->save()) {
-                print_r($model->getErrors());
-                die();
+                if (!$model->save()) {
+                    throw new Exception(implode("<br />", \yii\helpers\ArrayHelper::getColumn($model->getErrors(), 0, false)));
+                }
+
+                $transaction->commit();
+            } catch (Exception $e) {
+                $transaction->rollBack();
+                $controller = Yii::$app->controller->id . "/" . Yii::$app->controller->action->id;
+                CoreController::getErrorLog(\Yii::$app->user->identity->id, $e, $controller);
+                return $this->redirect(['index']);
             }
 
             Yii::$app->session->setFlash('success', "Registro creado exitosamente.");

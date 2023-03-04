@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 03, 2023 at 01:53 AM
+-- Generation Time: Mar 04, 2023 at 02:01 AM
 -- Server version: 5.7.33
 -- PHP Version: 8.2.1
 
@@ -153,6 +153,27 @@ INSERT INTO `tbl_categorias` (`id_categoria`, `nombre`, `descripcion`, `fecha_in
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_error_log`
+--
+
+CREATE TABLE `tbl_error_log` (
+  `id_error_log` int(11) NOT NULL,
+  `controller` varchar(50) NOT NULL,
+  `mensaje` text NOT NULL,
+  `us_id` int(11) NOT NULL,
+  `fecha` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_error_log`
+--
+
+INSERT INTO `tbl_error_log` (`id_error_log`, `controller`, `mensaje`, `us_id`, `fecha`) VALUES
+(1, 'categorias/create', 'Exception: Usuario is invalid. in C:\\laragon\\www\\yii2basico\\controllers\\CategoriasController.php:85<br />\nStack trace:<br />\n#0 [internal function]: app\\controllers\\CategoriasController-&gt;actionCreate()<br />\n#1 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\base\\InlineAction.php(57): call_user_func_array(Array, Array)<br />\n#2 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\base\\Controller.php(178): yii\\base\\InlineAction-&gt;runWithParams(Array)<br />\n#3 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\base\\Module.php(552): yii\\base\\Controller-&gt;runAction(&#039;create&#039;, Array)<br />\n#4 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\web\\Application.php(103): yii\\base\\Module-&gt;runAction(&#039;categorias/crea...&#039;, Array)<br />\n#5 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\base\\Application.php(384): yii\\web\\Application-&gt;handleRequest(Object(yii\\web\\Request))<br />\n#6 C:\\laragon\\www\\yii2basico\\web\\index.php(12): yii\\base\\Application-&gt;run()<br />\n#7 {main}', 1, '2023-03-03 19:57:40');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_usuarios`
 --
 
@@ -218,6 +239,13 @@ ALTER TABLE `tbl_categorias`
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
+-- Indexes for table `tbl_error_log`
+--
+ALTER TABLE `tbl_error_log`
+  ADD PRIMARY KEY (`id_error_log`),
+  ADD KEY `us_id` (`us_id`);
+
+--
 -- Indexes for table `tbl_usuarios`
 --
 ALTER TABLE `tbl_usuarios`
@@ -234,6 +262,12 @@ ALTER TABLE `tbl_usuarios`
 --
 ALTER TABLE `tbl_categorias`
   MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_error_log`
+--
+ALTER TABLE `tbl_error_log`
+  MODIFY `id_error_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_usuarios`
@@ -269,6 +303,12 @@ ALTER TABLE `auth_item_child`
 --
 ALTER TABLE `tbl_categorias`
   ADD CONSTRAINT `tbl_categorias_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `tbl_usuarios` (`id_usuario`);
+
+--
+-- Constraints for table `tbl_error_log`
+--
+ALTER TABLE `tbl_error_log`
+  ADD CONSTRAINT `tbl_error_log_ibfk_1` FOREIGN KEY (`us_id`) REFERENCES `tbl_usuarios` (`id_usuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
