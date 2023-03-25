@@ -7,9 +7,11 @@ use app\models\TblCategorias;
 use app\models\CategoriasSearch;
 use Exception;
 use app\controllers\CoreController;
+use app\models\TblBitacora;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * CategoriasController implements the CRUD actions for TblCategorias model.
@@ -77,7 +79,7 @@ class CategoriasController extends Controller
             try {
                 $model->fecha_ing = date('Y-m-d H:i:s');
                 $model->fecha_mod = date('Y-m-d H:i:s');
-                $model->visible = 1;
+                //$model->visible = 1;
                 //$model->id_usuario = 5;
                 $model->id_usuario = Yii::$app->user->identity->id;
 
@@ -114,13 +116,35 @@ class CategoriasController extends Controller
         $model = $this->findModel($id_categoria);
 
         if ($model->load($this->request->post())) {
-            $model->fecha_mod = date('Y-m-d H:i:s');
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+                $json = Json::encode($model->getDirtyAttributes(), JSON_PRETTY_PRINT);
+                $model->fecha_mod = date('Y-m-d H:i:s');
 
-            if (!$model->save()) {
-                print_r($model->getErrors());
-                die();
+                if (!$model->save()) {
+                    throw new Exception(implode("<br />", \yii\helpers\ArrayHelper::getColumn($model->getErrors(), 0, false)));
+                }
+
+                $bitacora = new TblBitacora();
+                $bitacora->id_registro = $model->id_categoria;
+                $bitacora->controlador = $controller = Yii::$app->controller->id;
+                $bitacora->accion = Yii::$app->controller->action->id;
+                $bitacora->data = $json;
+                $bitacora->id_usuario = Yii::$app->user->identity->id;
+                $bitacora->fecha = $model->fecha_mod;
+
+                if (!$bitacora->save()) {
+                    throw new Exception(implode("<br />", \yii\helpers\ArrayHelper::getColumn($model->getErrors(), 0, false)));
+                }
+
+                $transaction->commit();
+            } catch (Exception $e) {
+                $transaction->rollBack();
+                $controller = Yii::$app->controller->id . "/" . Yii::$app->controller->action->id;
+                CoreController::getErrorLog(\Yii::$app->user->identity->id, $e, $controller);
+                return $this->redirect(['index']);
             }
-
+            Yii::$app->session->setFlash('success', "Registro actualizado exitosamente.");
             return $this->redirect(['view', 'id_categoria' => $model->id_categoria]);
         } else {
             return $this->render('update', [

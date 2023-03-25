@@ -27,14 +27,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         <td width="34%"> <?= $model->nombre ?></td>
                     </tr>
                     <tr>
+                        <td><b>Descripcion: </b></td>
+                        <td colspan="3"><?= $model->descripcion ?></td>
+                    </tr>
+                    <tr>
                         <td><b>Fecha creacion:</b></td>
                         <td><?= date('d-m-Y H:m:i', strtotime($model->fecha_ing)) ?></td>
                         <td><b>Fecha modificacion:</b></td>
                         <td><?= date('d-m-Y H:m:i', strtotime($model->fecha_mod)) ?></td>
-                    </tr>
-                    <tr>
-                        <td><b>Descripcion: </b></td>
-                        <td colspan="3"><?= $model->descripcion ?></td>
                     </tr>
                     <tr>
                         <td><b>Visible: </b></td>
