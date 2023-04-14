@@ -21,7 +21,7 @@ use Yii;
  * @property int $updated_at
  * @property string|null $verification_token
  */
-class TblUsuarios extends \yii\db\ActiveRecord
+class Usuarios extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}

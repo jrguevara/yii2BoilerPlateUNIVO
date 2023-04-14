@@ -15,9 +15,9 @@ use Yii;
  * @property int $id_usuario
  * @property string $fecha
  *
- * @property TblUsuarios $usuario
+ * @property Usuarios $usuario
  */
-class TblBitacora extends \yii\db\ActiveRecord
+class Bitacora extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -38,7 +38,7 @@ class TblBitacora extends \yii\db\ActiveRecord
             [['data'], 'string'],
             [['fecha'], 'safe'],
             [['controlador', 'accion'], 'string', 'max' => 25],
-            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => TblUsuarios::class, 'targetAttribute' => ['id_usuario' => 'id_usuario']],
+            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['id_usuario' => 'id_usuario']],
         ];
     }
 
@@ -65,6 +65,6 @@ class TblBitacora extends \yii\db\ActiveRecord
      */
     public function getUsuario()
     {
-        return $this->hasOne(TblUsuarios::class, ['id_usuario' => 'id_usuario']);
+        return $this->hasOne(Usuarios::class, ['id_usuario' => 'id_usuario']);
     }
 }

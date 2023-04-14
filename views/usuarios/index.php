@@ -1,7 +1,7 @@
 <?php
 Yii::$app->language = 'es_ES';
 
-use app\models\TblUsuarios;
+use app\models\Usuarios;
 use kartik\export\ExportMenu;
 use yii\helpers\Html;
 use kartik\grid\GridView;
@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'kartik\grid\ActionColumn',
-                    'urlCreator' => function ($action, TblUsuarios $model, $key, $index, $column) {
+                    'urlCreator' => function ($action, Usuarios $model, $key, $index, $column) {
                         return Url::toRoute([$action, 'id_usuario' => $model->id_usuario]);
                     }
                 ],

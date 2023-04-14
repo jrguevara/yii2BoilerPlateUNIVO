@@ -4,7 +4,7 @@ namespace app\controllers;
 use Yii;
 use Exception;
 use yii\helpers\Html;
-use app\models\TblErrorLog;
+use app\models\ErrorLog;
 
 class CoreController
 {
@@ -15,7 +15,7 @@ class CoreController
         Yii::$app->getSession()->setFlash('warning', nl2br(Html::encode($e)));
         //Guardar en bdd
         //mensaje de error, datetime, IdUsuario, controlador, id de la acción, retornar
-        $errorLog = new TblErrorLog();
+        $errorLog = new ErrorLog();
         //$errorLog->mensaje = $e->getMessage();
         $errorLog->mensaje = nl2br(Html::encode($e));
         $errorLog->fecha = date("Y-m-d H:i:s");

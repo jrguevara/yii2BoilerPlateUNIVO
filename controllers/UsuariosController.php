@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\TblUsuarios;
+use app\models\Usuarios;
 use app\models\UsuarioSignup;
+use yii\filters\VerbFilter;
 use app\models\UsuariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
 /**
- * UsuariosController implements the CRUD actions for TblUsuarios model.
+ * UsuariosController implements the CRUD actions for Usuarios model.
  */
 class UsuariosController extends Controller
 {
@@ -35,7 +35,7 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Lists all TblUsuarios models.
+     * Lists all Usuarios models.
      *
      * @return string
      */
@@ -51,7 +51,7 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Displays a single TblUsuarios model.
+     * Displays a single Usuarios model.
      * @param int $id_usuario Id Usuario
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -64,7 +64,7 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Creates a new TblUsuarios model.
+     * Creates a new Usuarios model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
@@ -98,7 +98,7 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Updates an existing TblUsuarios model.
+     * Updates an existing Usuarios model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id_usuario Id Usuario
      * @return string|\yii\web\Response
@@ -115,7 +115,7 @@ class UsuariosController extends Controller
             $image = UploadedFile::getInstance($model, 'imagen');
 
             if (empty($image)) {
-                $model->imagen = $_POST['TblUsuarios']['imagen'];
+                $model->imagen = $_POST['Usuarios']['imagen'];
             } else {
                 $tmp = explode(".", $image->name);
                 $ext = end($tmp);
@@ -126,7 +126,7 @@ class UsuariosController extends Controller
                 $image->saveAs($path);
             }
 
-            $i = $_POST['TblUsuarios']['password_hash'];
+            $i = $_POST['Usuarios']['password_hash'];
             if (empty($i)) {
                 $model->password_hash = $j;
             } else {
@@ -144,7 +144,7 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Deletes an existing TblUsuarios model.
+     * Deletes an existing Usuarios model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id_usuario Id Usuario
      * @return \yii\web\Response
@@ -161,15 +161,15 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Finds the TblUsuarios model based on its primary key value.
+     * Finds the Usuarios model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id_usuario Id Usuario
-     * @return TblUsuarios the loaded model
+     * @return Usuarios the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id_usuario)
     {
-        if (($model = TblUsuarios::findOne(['id_usuario' => $id_usuario])) !== null) {
+        if (($model = Usuarios::findOne(['id_usuario' => $id_usuario])) !== null) {
             return $model;
         }
 

@@ -13,9 +13,9 @@ use Yii;
  * @property int $us_id
  * @property string $fecha
  *
- * @property TblUsuarios $us
+ * @property Usuarios $us
  */
-class TblErrorLog extends \yii\db\ActiveRecord
+class ErrorLog extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -36,7 +36,7 @@ class TblErrorLog extends \yii\db\ActiveRecord
             [['us_id'], 'integer'],
             [['fecha'], 'safe'],
             [['controller'], 'string', 'max' => 50],
-            [['us_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblUsuarios::class, 'targetAttribute' => ['us_id' => 'id_usuario']],
+            [['us_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['us_id' => 'id_usuario']],
         ];
     }
 
@@ -61,6 +61,6 @@ class TblErrorLog extends \yii\db\ActiveRecord
      */
     public function getUs()
     {
-        return $this->hasOne(TblUsuarios::class, ['id_usuario' => 'us_id']);
+        return $this->hasOne(Usuarios::class, ['id_usuario' => 'us_id']);
     }
 }
