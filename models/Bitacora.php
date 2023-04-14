@@ -11,7 +11,8 @@ use Yii;
  * @property int $id_registro
  * @property string $controlador
  * @property string $accion
- * @property string $data
+ * @property string $data_original
+ * @property string $data_modificada
  * @property int $id_usuario
  * @property string $fecha
  *
@@ -33,9 +34,9 @@ class Bitacora extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_registro', 'controlador', 'accion', 'data', 'id_usuario', 'fecha'], 'required'],
+            [['id_registro', 'controlador', 'accion', 'id_usuario', 'fecha'], 'required'],
             [['id_registro', 'id_usuario'], 'integer'],
-            [['data'], 'string'],
+            [['data_original', 'data_modificada'], 'string'],
             [['fecha'], 'safe'],
             [['controlador', 'accion'], 'string', 'max' => 25],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['id_usuario' => 'id_usuario']],
@@ -52,8 +53,9 @@ class Bitacora extends \yii\db\ActiveRecord
             'id_registro' => 'Id Registro',
             'controlador' => 'Controlador',
             'accion' => 'Accion',
-            'data' => 'Data',
-            'id_usuario' => 'Id Usuario',
+            'data' => 'Data Original',
+            'data' => 'Data Modificada',
+            'id_usuario' => 'Usuario',
             'fecha' => 'Fecha',
         ];
     }

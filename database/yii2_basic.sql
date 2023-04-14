@@ -62,14 +62,9 @@ CREATE TABLE `auth_item` (
 --
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
-('/categorias/*', 2, NULL, NULL, NULL, 1677807244, 1677807244),
 ('/debug/*', 2, NULL, NULL, NULL, 1677807204, 1677807204),
 ('/gii/*', 2, NULL, NULL, NULL, 1677807211, 1677807211),
 ('/gridview/*', 2, NULL, NULL, NULL, 1677807174, 1677807174),
-('/inicio/*', 2, NULL, NULL, NULL, 1677807219, 1677807219),
-('/inicio/index', 2, NULL, NULL, NULL, 1677807237, 1677807237),
-('/inicio/resta', 2, NULL, NULL, NULL, 1677807237, 1677807237),
-('/inicio/suma', 2, NULL, NULL, NULL, 1677807237, 1677807237),
 ('/rbac/*', 2, NULL, NULL, NULL, 1677807195, 1677807195),
 ('/site/*', 2, NULL, NULL, NULL, 1677807256, 1677807256),
 ('/usuarios/*', 2, NULL, NULL, NULL, 1677807263, 1677807263),
@@ -94,16 +89,10 @@ CREATE TABLE `auth_item_child` (
 --
 
 INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
-('PermisoAdmin', '/categorias/*'),
-('PermisoDemo', '/categorias/*'),
 ('PermisoAdmin', '/debug/*'),
 ('PermisoAdmin', '/gii/*'),
 ('PermisoAdmin', '/gridview/*'),
 ('PermisoDemo', '/gridview/*'),
-('PermisoAdmin', '/inicio/*'),
-('PermisoDemo', '/inicio/index'),
-('PermisoDemo', '/inicio/resta'),
-('PermisoDemo', '/inicio/suma'),
 ('PermisoAdmin', '/rbac/*'),
 ('PermisoAdmin', '/site/*'),
 ('PermisoDemo', '/site/*'),
@@ -135,48 +124,12 @@ CREATE TABLE `tbl_bitacora` (
   `id_registro` int(11) NOT NULL,
   `controlador` varchar(25) NOT NULL,
   `accion` varchar(25) NOT NULL,
-  `data` text NOT NULL,
+  `data_original` text NOT NULL,
+  `data_modificada` text NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `fecha` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `tbl_bitacora`
---
-
-INSERT INTO `tbl_bitacora` (`id_bitacora`, `id_registro`, `controlador`, `accion`, `data`, `id_usuario`, `fecha`) VALUES
-(1, 4, 'categorias', 'update', '[]', 1, '2023-03-23 20:12:06'),
-(2, 4, 'categorias', 'update', '[]', 1, '2023-03-23 20:14:59'),
-(3, 4, 'categorias', 'update', '[]', 1, '2023-03-23 20:19:01'),
-(4, 4, 'categorias', 'update', '{\n    \"nombre\": \"Muebles modificdo\",\n    \"fecha_mod\": \"2023-03-23 20:23:06\",\n    \"visible\": \"1\"\n}', 1, '2023-03-23 20:23:06'),
-(5, 4, 'categorias', 'update', '{\n    \"nombre\": \"Muebles\",\n    \"fecha_mod\": \"2023-03-23 20:24:09\",\n    \"visible\": \"1\"\n}', 1, '2023-03-23 20:24:09'),
-(6, 3, 'categorias', 'update', '{\n    \"nombre\": \"Juguetes mod\",\n    \"visible\": \"1\"\n}', 1, '2023-03-24 19:12:14');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_categorias`
---
-
-CREATE TABLE `tbl_categorias` (
-  `id_categoria` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `descripcion` text,
-  `fecha_ing` datetime NOT NULL,
-  `fecha_mod` datetime NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `visible` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `tbl_categorias`
---
-
-INSERT INTO `tbl_categorias` (`id_categoria`, `nombre`, `descripcion`, `fecha_ing`, `fecha_mod`, `id_usuario`, `visible`) VALUES
-(1, 'Videojuegos', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo exercitationem laudantium aliquam eius nisi quibusdam, libero necessitatibus quidem magnam iusto maiores harum laboriosam non vitae rem velit nesciunt praesentium. Reprehenderit.', '2023-02-03 09:00:00', '2023-02-24 19:19:36', 1, 1),
-(2, 'Cocina', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo exercitationem laudantium aliquam eius nisi quibusdam, libero necessitatibus quidem magnam iusto maiores harum laboriosam non vitae rem velit nesciunt praesentium. Reprehenderit.', '2023-02-03 10:00:00', '2023-03-23 18:48:26', 2, 1),
-(3, 'Juguetes mod', '<font style=\"background-color: rgb(255, 255, 0);\" color=\"#000000\"><i>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint aspernatur nulla est excepturi, amet in voluptates quia, labore quo expedita itaque totam voluptatibus, molestiae doloremque vero omnis autem facilis recusandae!</i></font><br>', '2023-02-17 20:02:46', '2023-03-24 19:12:14', 2, 1),
-(4, 'Muebles', '<p>lorem ipsum<br></p>', '2023-02-24 20:16:23', '2023-03-23 20:24:09', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -191,15 +144,6 @@ CREATE TABLE `tbl_error_log` (
   `us_id` int(11) NOT NULL,
   `fecha` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `tbl_error_log`
---
-
-INSERT INTO `tbl_error_log` (`id_error_log`, `controller`, `mensaje`, `us_id`, `fecha`) VALUES
-(1, 'categorias/create', 'Exception: Usuario is invalid. in C:\\laragon\\www\\yii2basico\\controllers\\CategoriasController.php:85<br />\nStack trace:<br />\n#0 [internal function]: app\\controllers\\CategoriasController-&gt;actionCreate()<br />\n#1 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\base\\InlineAction.php(57): call_user_func_array(Array, Array)<br />\n#2 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\base\\Controller.php(178): yii\\base\\InlineAction-&gt;runWithParams(Array)<br />\n#3 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\base\\Module.php(552): yii\\base\\Controller-&gt;runAction(&#039;create&#039;, Array)<br />\n#4 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\web\\Application.php(103): yii\\base\\Module-&gt;runAction(&#039;categorias/crea...&#039;, Array)<br />\n#5 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\base\\Application.php(384): yii\\web\\Application-&gt;handleRequest(Object(yii\\web\\Request))<br />\n#6 C:\\laragon\\www\\yii2basico\\web\\index.php(12): yii\\base\\Application-&gt;run()<br />\n#7 {main}', 1, '2023-03-03 19:57:40'),
-(2, 'categorias/update', 'Exception in C:\\laragon\\www\\yii2basico\\controllers\\CategoriasController.php:139<br />\nStack trace:<br />\n#0 [internal function]: app\\controllers\\CategoriasController-&gt;actionUpdate(&#039;4&#039;)<br />\n#1 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\base\\InlineAction.php(57): call_user_func_array(Array, Array)<br />\n#2 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\base\\Controller.php(178): yii\\base\\InlineAction-&gt;runWithParams(Array)<br />\n#3 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\base\\Module.php(552): yii\\base\\Controller-&gt;runAction(&#039;update&#039;, Array)<br />\n#4 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\web\\Application.php(103): yii\\base\\Module-&gt;runAction(&#039;categorias/upda...&#039;, Array)<br />\n#5 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\base\\Application.php(384): yii\\web\\Application-&gt;handleRequest(Object(yii\\web\\Request))<br />\n#6 C:\\laragon\\www\\yii2basico\\web\\index.php(12): yii\\base\\Application-&gt;run()<br />\n#7 {main}', 1, '2023-03-23 20:15:55'),
-(3, 'categorias/update', 'Exception in C:\\laragon\\www\\yii2basico\\controllers\\CategoriasController.php:139<br />\nStack trace:<br />\n#0 [internal function]: app\\controllers\\CategoriasController-&gt;actionUpdate(&#039;4&#039;)<br />\n#1 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\base\\InlineAction.php(57): call_user_func_array(Array, Array)<br />\n#2 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\base\\Controller.php(178): yii\\base\\InlineAction-&gt;runWithParams(Array)<br />\n#3 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\base\\Module.php(552): yii\\base\\Controller-&gt;runAction(&#039;update&#039;, Array)<br />\n#4 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\web\\Application.php(103): yii\\base\\Module-&gt;runAction(&#039;categorias/upda...&#039;, Array)<br />\n#5 C:\\laragon\\www\\yii2basico\\vendor\\yiisoft\\yii2\\base\\Application.php(384): yii\\web\\Application-&gt;handleRequest(Object(yii\\web\\Request))<br />\n#6 C:\\laragon\\www\\yii2basico\\web\\index.php(12): yii\\base\\Application-&gt;run()<br />\n#7 {main}', 1, '2023-03-23 20:18:20');
 
 -- --------------------------------------------------------
 
@@ -269,13 +213,6 @@ ALTER TABLE `tbl_bitacora`
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Indexes for table `tbl_categorias`
---
-ALTER TABLE `tbl_categorias`
-  ADD PRIMARY KEY (`id_categoria`),
-  ADD KEY `id_usuario` (`id_usuario`);
-
---
 -- Indexes for table `tbl_error_log`
 --
 ALTER TABLE `tbl_error_log`
@@ -293,24 +230,6 @@ ALTER TABLE `tbl_usuarios`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `tbl_bitacora`
---
-ALTER TABLE `tbl_bitacora`
-  MODIFY `id_bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `tbl_categorias`
---
-ALTER TABLE `tbl_categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `tbl_error_log`
---
-ALTER TABLE `tbl_error_log`
-  MODIFY `id_error_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_usuarios`
@@ -346,12 +265,6 @@ ALTER TABLE `auth_item_child`
 --
 ALTER TABLE `tbl_bitacora`
   ADD CONSTRAINT `tbl_bitacora_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `tbl_usuarios` (`id_usuario`);
-
---
--- Constraints for table `tbl_categorias`
---
-ALTER TABLE `tbl_categorias`
-  ADD CONSTRAINT `tbl_categorias_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `tbl_usuarios` (`id_usuario`);
 
 --
 -- Constraints for table `tbl_error_log`
