@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Usuarios;
+use app\models\Users;
 
 /**
- * UsuariosSearch represents the model behind the search form of `app\models\Usuarios`.
+ * UsersSearch represents the model behind the search form of `app\models\Users`.
  */
-class UsuariosSearch extends Usuarios
+class UsersSearch extends Users
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class UsuariosSearch extends Usuarios
     public function rules()
     {
         return [
-            [['id_usuario', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'nombre', 'apellido', 'auth_key', 'password_hash', 'email', 'imagen'], 'safe'],
+            [['id_user', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['username', 'name', 'lastname', 'auth_key', 'password_hash', 'email', 'picture'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class UsuariosSearch extends Usuarios
      */
     public function search($params)
     {
-        $query = Usuarios::find();
+        $query = Users::find();
 
         // add conditions that should always apply here
 
@@ -58,19 +58,19 @@ class UsuariosSearch extends Usuarios
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id_usuario' => $this->id_usuario,
+            'id_user' => $this->id_user,
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'apellido', $this->apellido])
+            ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'lastname', $this->lastname])
             ->andFilterWhere(['like', 'auth_key', $this->auth_key])
             ->andFilterWhere(['like', 'password_hash', $this->password_hash])
             ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'imagen', $this->imagen]);
+            ->andFilterWhere(['like', 'picture', $this->picture]);
 
         return $dataProvider;
     }

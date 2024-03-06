@@ -58,7 +58,7 @@ $this->registerCssFile('https://code.ionicframework.com/ionicons/2.0.1/css/ionic
     }
 
     body {
-        background: #154c93 !important;
+        background: #343a40 !important;
     }
 
     .wrapper.form-success .container h1 {

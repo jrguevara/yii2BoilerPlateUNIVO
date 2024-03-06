@@ -1,10 +1,12 @@
 <?php
+/* Yii::$app->request->hostInfo . $model->imagen; ?>" width="150"; */
 
 use yii\helpers\Html;
 
 $this->title = 'Detalle';
 $this->params['breadcrumbs'][] = ['label' => 'Listado', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <br>
 <div class="row">
@@ -14,18 +16,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 <table class="table table-sm table-striped table-hover table-bordered">
                     <tr>
                         <td width="150px" rowspan="9">
-                            <img src="<?= Yii::$app->request->hostInfo . $model->imagen ?>" width="150" />
+                        <img src="<?= Yii::$app->request->hostInfo . $model->picture ?>" width="150" />
                         </td>
                         <td width="200px"><b>Usuario:</b></td>
                         <td><?= $model->username ?></td>
                     </tr>
                     <tr>
                         <td><b>Nombre:</b></td>
-                        <td><?= $model->nombre ?></td>
+                        <td><?= $model->name ?></td>
                     </tr>
                     <tr>
                         <td><b>Apellido:</b></td>
-                        <td><?= $model->apellido ?></td>
+                        <td><?= $model->lastname ?></td>
                     </tr>
                     <tr>
                         <td><b>Email:</b></td>
@@ -48,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </table>
             </div>
             <div class="card-footer">
-                <?php echo Html::a('<i class="fa fa-edit"></i> Editar', ['update', 'id_usuario' => $model->id_usuario], ['class' => 'btn btn-primary', 'data-toggle' => 'tooltip', 'title' => 'Edit record']) ?>
+                <?php echo Html::a('<i class="fa fa-edit"></i> Editar', ['update', 'id_user' => $model->id_user], ['class' => 'btn btn-primary', 'data-toggle' => 'tooltip', 'title' => 'Edit record']) ?>
                 <?php echo Html::a('<i class="fa fa-ban"></i> Cancelar', ['index'], ['class' => 'btn btn-danger', 'data-toggle' => 'tooltip', 'title' => 'Cancelar']) ?>
             </div>
         </div>

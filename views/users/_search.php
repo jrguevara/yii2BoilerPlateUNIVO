@@ -4,24 +4,24 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\UsuariosSearch $model */
+/** @var app\models\UsersSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="tbl-usuarios-search">
+<div class="user-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id_usuario') ?>
+    <?= $form->field($model, 'id_user') ?>
 
     <?= $form->field($model, 'username') ?>
 
-    <?= $form->field($model, 'nombre') ?>
+    <?= $form->field($model, 'name') ?>
 
-    <?= $form->field($model, 'apellido') ?>
+    <?= $form->field($model, 'lastname') ?>
 
     <?= $form->field($model, 'auth_key') ?>
 
@@ -29,7 +29,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'email') ?>
 
-    <?php // echo $form->field($model, 'imagen') ?>
+    <?php // echo $form->field($model, 'picture') ?>
 
     <?php // echo $form->field($model, 'status') ?>
 

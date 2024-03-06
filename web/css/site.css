@@ -82,3 +82,22 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+    .brand-link {
+        border-bottom: none !important;
+    }
+
+    .sidebar-dark-warning .nav-sidebar>.nav-item>.nav-link.active,
+    .sidebar-light-warning .nav-sidebar>.nav-item>.nav-link.active {
+        background-color: #ffc107 !important;
+        color: #000 !important;
+    }
+    .nav-item>.nav-link.active {
+        /*background-color: #332940 !important;*/
+        background-color: #000 !important;
+        color: #fff !important;
+    }
+
+    .elevation-4 {
+        box-shadow: none !important;
+    }

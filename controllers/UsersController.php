@@ -3,18 +3,18 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Usuarios;
-use app\models\UsuarioSignup;
+use app\models\Users;
+use app\models\UserSignup;
 use yii\filters\VerbFilter;
-use app\models\UsuariosSearch;
+use app\models\UsersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
 /**
- * UsuariosController implements the CRUD actions for Usuarios model.
+ * UsersController implements the CRUD actions for Users model.
  */
-class UsuariosController extends Controller
+class UsersController extends Controller
 {
     /**
      * @inheritDoc
@@ -35,13 +35,13 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Lists all Usuarios models.
+     * Lists all Users models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new UsuariosSearch();
+        $searchModel = new UsersSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -51,40 +51,40 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Displays a single Usuarios model.
-     * @param int $id_usuario Id Usuario
+     * Displays a single Users model.
+     * @param int $id_user Id User
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id_usuario)
+    public function actionView($id_user)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id_usuario),
+            'model' => $this->findModel($id_user),
         ]);
     }
 
     /**
-     * Creates a new Usuarios model.
+     * Creates a new Users model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new UsuarioSignup();
+        $model = new UserSignup();
 
         if ($model->load(Yii::$app->request->post())) {
-            $image = UploadedFile::getInstance($model, 'imagen');
-            if (empty($image)) {
+            $upload = UploadedFile::getInstance($model, 'picture');
+            if (empty($upload)) {
                 $name = $this->request->baseUrl . '/avatars/default.png';
-                $model->imagen = $name;
+                $model->picture = $name;
             } else {
-                $tmp = explode(".", $image->name);
+                $tmp = explode(".", $upload->name);
                 $ext = end($tmp);
                 $name = Yii::$app->security->generateRandomString() . ".{$ext}";
                 $path = Yii::$app->basePath . '/web/avatars/' . $name;
                 $path2 = Yii::$app->request->baseUrl . '/avatars/' . $name;
-                $model->imagen = $path2;
-                $image->saveAs($path);
+                $model->picture = $path2;
+                $upload->saveAs($path);
             }
             if ($model->signup()) { {
                     return $this->redirect(['index']);
@@ -98,35 +98,35 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Updates an existing Usuarios model.
+     * Updates an existing Users model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id_usuario Id Usuario
+     * @param int $id_user Id User
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id_usuario)
+    public function actionUpdate($id_user)
     {
-        $model = $this->findModel($id_usuario);
+        $model = $this->findModel($id_user);
 
-        //TODO: Remover required password hash de TblUsuario    
-        $j = $model->password_hash;
-
+        $j = $model->password_hash;   
+        
         if ($model->load(Yii::$app->request->post())) {
-            $image = UploadedFile::getInstance($model, 'imagen');
+                // maybe remove this if to get URL of image from callback
+            $upload = UploadedFile::getInstance($model, 'picture');
 
-            if (empty($image)) {
-                $model->imagen = $_POST['Usuarios']['imagen'];
+            if (empty($upload)) {
+                $model->picture = $_POST['Users']['picture'];
             } else {
-                $tmp = explode(".", $image->name);
+                $tmp = explode(".", $upload->name);
                 $ext = end($tmp);
                 $name = Yii::$app->security->generateRandomString() . ".{$ext}";
                 $path = Yii::$app->basePath . '/web/avatars/' . $name;
                 $path2 = Yii::$app->request->baseUrl . '/avatars/' . $name;;
-                $model->imagen = $path2;
-                $image->saveAs($path);
+                $model->picture = $path2;
+                $upload->saveAs($path);
             }
 
-            $i = $_POST['Usuarios']['password_hash'];
+            $i = $_POST['Users']['password_hash'];
             if (empty($i)) {
                 $model->password_hash = $j;
             } else {
@@ -135,7 +135,7 @@ class UsuariosController extends Controller
             }
 
             $model->save();
-            return $this->redirect(['view', 'id_usuario' => $model->id_usuario]);
+            return $this->redirect(['view', 'id_user' => $model->id_user]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -144,16 +144,16 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Deletes an existing Usuarios model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id_usuario Id Usuario
+     * @param int $id_user Id User
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id_usuario)
+    public function actionDelete($id_user)
     {
-        //$this->findModel($id_usuario)->delete();
-        $model = $this->findModel($id_usuario);
+        //$this->findModel($id_user)->delete();
+        $model = $this->findModel($id_user);
         $model->status = 0;
         $model->save();
 
@@ -161,15 +161,15 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Finds the Usuarios model based on its primary key value.
+     * Finds the Users model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id_usuario Id Usuario
-     * @return Usuarios the loaded model
+     * @param int $id_user Id User
+     * @return Users the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id_usuario)
+    protected function findModel($id_user)
     {
-        if (($model = Usuarios::findOne(['id_usuario' => $id_usuario])) !== null) {
+        if (($model = Users::findOne(['id_user' => $id_user])) !== null) {
             return $model;
         }
 

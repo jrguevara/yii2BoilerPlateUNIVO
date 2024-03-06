@@ -5,15 +5,15 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "tbl_error_log".
+ * This is the model class for table "error_log".
  *
  * @property int $id_error_log
  * @property string $controller
- * @property string $mensaje
- * @property int $us_id
+ * @property string $message
+ * @property int $id_user
  * @property string $fecha
  *
- * @property Usuarios $us
+ * @property Users $us
  */
 class ErrorLog extends \yii\db\ActiveRecord
 {
@@ -22,7 +22,7 @@ class ErrorLog extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'tbl_error_log';
+        return 'error_log';
     }
 
     /**
@@ -31,12 +31,12 @@ class ErrorLog extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['controller', 'mensaje', 'us_id', 'fecha'], 'required'],
-            [['mensaje'], 'string'],
-            [['us_id'], 'integer'],
-            [['fecha'], 'safe'],
+            [['controller', 'message', 'id_user', 'date'], 'required'],
+            [['message'], 'string'],
+            [['id_user'], 'integer'],
+            [['date'], 'safe'],
             [['controller'], 'string', 'max' => 50],
-            [['us_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['us_id' => 'id_usuario']],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['id_user' => 'id_user']],
         ];
     }
 
@@ -46,11 +46,11 @@ class ErrorLog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_error_log' => 'Id Error Log',
+            'id_error_log' => 'Id',
             'controller' => 'Controller',
-            'mensaje' => 'Mensaje',
-            'us_id' => 'Us ID',
-            'fecha' => 'Fecha',
+            'message' => 'Mensaje',
+            'id_user' => 'Usuario',
+            'date' => 'Fecha',
         ];
     }
 
@@ -61,6 +61,6 @@ class ErrorLog extends \yii\db\ActiveRecord
      */
     public function getUs()
     {
-        return $this->hasOne(Usuarios::class, ['id_usuario' => 'us_id']);
+        return $this->hasOne(Users::class, ['id_user' => 'id_user']);
     }
 }

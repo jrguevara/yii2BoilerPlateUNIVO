@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Feb 23, 2024 at 01:12 AM
--- Server version: 5.7.39
--- PHP Version: 8.2.0
+-- Host: localhost:3306
+-- Generation Time: Mar 25, 2023 at 01:13 AM
+-- Server version: 5.7.33
+-- PHP Version: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -116,21 +116,7 @@ CREATE TABLE `auth_rule` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `error_log`
---
-
-CREATE TABLE `error_log` (
-  `id_error_log` int(11) NOT NULL,
-  `controller` varchar(50) NOT NULL,
-  `message` text NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `log`
+-- Table structure for table `bitacora`
 --
 
 CREATE TABLE `log` (
@@ -140,6 +126,21 @@ CREATE TABLE `log` (
   `action` varchar(25) NOT NULL,
   `original_data` text NOT NULL,
   `updated_data` text NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `error_log`
+--
+
+CREATE TABLE `error_log` (
+  `id_error_log` int(11) NOT NULL,
+  `controller` varchar(50) NOT NULL,
+  `message` text NOT NULL,
   `id_user` int(11) NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -205,18 +206,18 @@ ALTER TABLE `auth_rule`
   ADD PRIMARY KEY (`name`);
 
 --
+-- Indexes for table `bitacora`
+--
+ALTER TABLE `log`
+  ADD PRIMARY KEY (`id_log`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- Indexes for table `error_log`
 --
 ALTER TABLE `error_log`
   ADD PRIMARY KEY (`id_error_log`),
   ADD KEY `us_id` (`id_user`);
-
---
--- Indexes for table `log`
---
-ALTER TABLE `log`
-  ADD PRIMARY KEY (`id_log`),
-  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `users`
@@ -260,16 +261,16 @@ ALTER TABLE `auth_item_child`
   ADD CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `bitacora`
+--
+ALTER TABLE `log`
+  ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
+
+--
 -- Constraints for table `error_log`
 --
 ALTER TABLE `error_log`
   ADD CONSTRAINT `error_log_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
-
---
--- Constraints for table `log`
---
-ALTER TABLE `log`
-  ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

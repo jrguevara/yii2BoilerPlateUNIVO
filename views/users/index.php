@@ -1,7 +1,7 @@
 <?php
 Yii::$app->language = 'es_ES';
 
-use app\models\Usuarios;
+use app\models\Users;
 use kartik\export\ExportMenu;
 use yii\helpers\Html;
 use kartik\grid\GridView;
@@ -38,17 +38,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     'vAlign' => 'middle',
                     'format' => 'raw',
                     'value' => function ($model, $key, $index, $widget) {
-                        return Html::a($model->username,  ['view', 'id_usuario' => $model->id_usuario]);
+                        return Html::a($model->username,  ['view', 'id_user' => $model->id_user]);
                     },
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'attribute' => 'nombre',
+                    'attribute' => 'name',
                     'vAlign' => 'middle',
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'attribute' => 'apellido',
+                    'attribute' => 'lastname',
                     'vAlign' => 'middle',
                 ],
                 [
@@ -59,8 +59,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'kartik\grid\ActionColumn',
-                    'urlCreator' => function ($action, Usuarios $model, $key, $index, $column) {
-                        return Url::toRoute([$action, 'id_usuario' => $model->id_usuario]);
+                    'urlCreator' => function ($action, Users $model, $key, $index, $column) {
+                        return Url::toRoute([$action, 'id_user' => $model->id_user]);
                     }
                 ],
             ];
@@ -88,33 +88,33 @@ $this->params['breadcrumbs'][] = $this->title;
                 'toolbar' =>  [
                     [
                         'content' =>
-                            Html::a('<i class="fas fa-plus"></i> Agregar', ['create'], [
-                                'class' => 'btn btn-success',
-                                'data-pjax' => 0,
-                            ]) . ' '.
+                        Html::a('<i class="fas fa-plus"></i> Agregar', ['create'], [
+                            'class' => 'btn btn-success',
+                            'data-pjax' => 0,
+                        ]) . ' ' .
                             Html::a('<i class="fas fa-redo"></i>', ['index'], [
                                 'class' => 'btn btn-outline-success',
-                                'title'=>Yii::t('kvgrid', 'Limpiar filtros'),
-                                'data-pjax' => 0, 
-                            ]), 
+                                'title' => Yii::t('kvgrid', 'Limpiar filtros'),
+                                'data-pjax' => 0,
+                            ]),
                         'options' => ['class' => 'btn-group mr-2']
                     ],
                     '{toggleData}',
                     $exportmenu,
-                    
+
                 ],
                 'toggleDataContainer' => ['class' => 'btn-group mr-2'],
                 // set export properties
                 // parameters from the demo form
-                'bordered'=> true,
-                'striped'=> true,
-                'condensed'=> true,
-                'responsive'=> true,
-                'hover'=> true,
+                'bordered' => false,
+                'striped' => true,
+                'condensed' => true,
+                'responsive' => true,
+                'hover' => true,
                 //'showPageSummary'=>$pageSummary,
                 'panel' => [
                     'type' => GridView::TYPE_DARK,
-                    'heading'=> 'Usuarios',
+                    'heading' => 'Usuarios',
                 ],
                 'persistResize' => false,
             ]);

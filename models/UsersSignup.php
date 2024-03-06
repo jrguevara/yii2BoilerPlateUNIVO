@@ -7,29 +7,29 @@ use yii\base\Model;
 use app\models\User;
 
 /**
- * This is the model class for table "tbl_usuarios".
+ * This is the model class for table "users".
  *
- * @property int $id_usuario
+ * @property int $id_user
  * @property string $username
- * @property string $nombre
- * @property string $apellido
+ * @property string $name
+ * @property string $lastname
  * @property string $auth_key
  * @property string $password_hash
  * @property string $email
- * @property string|null $imagen
+ * @property string|null $picture
  * @property int $status
  * @property int $created_at
  * @property int $updated_at
  */
-class UsuarioSignup extends \yii\db\ActiveRecord
+class userSignup extends \yii\db\ActiveRecord
 {
 
     public $username;
     public $email;
-    public $nombre;
-    public $apellido;
+    public $name;
+    public $lastname;
     public $status;
-    public $imagen;
+    public $picture;
     public $password;
     public $authKey;
 
@@ -38,7 +38,7 @@ class UsuarioSignup extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'tbl_usuarios';
+        return 'users';
     }
 
     /**
@@ -49,20 +49,20 @@ class UsuarioSignup extends \yii\db\ActiveRecord
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\app\models\User', 'message' => 'Nombre de usuario ya existe.'],
+            ['username', 'unique', 'targetClass' => '\app\models\User', 'message' => 'Nombre de user ya existe.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
-            ['nombre', 'trim'],
-            ['nombre', 'required'],
-            ['nombre', 'string', 'min' => 2, 'max' => 255],
+            ['name', 'trim'],
+            ['name', 'required'],
+            ['name', 'string', 'min' => 2, 'max' => 255],
 
-            ['apellido', 'trim'],
-            ['apellido', 'required'],
-            ['apellido', 'string', 'min' => 2, 'max' => 255],
+            ['lastname', 'trim'],
+            ['lastname', 'required'],
+            ['ñastname', 'string', 'min' => 2, 'max' => 255],
 
-            [['imagen'], 'safe'],
-            [['imagen'], 'file', 'extensions' => 'jpg, gif, png'],
-            ['imagen', 'string', 'min' => 2, 'max' => 255],
+            [['picture'], 'safe'],
+            [['picture'], 'file', 'extensions' => 'jpg, gif, png'],
+            ['picture', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
@@ -83,14 +83,14 @@ class UsuarioSignup extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_usuario' => 'Id',
-            'username' => 'Usuario',
-            'nombre' => 'Nombre',
-            'apellido' => 'Apellido',
+            'id_user' => 'Id',
+            'username' => 'user',
+            'name' => 'Nombre',
+            'lastname' => 'Apellido',
             'auth_key' => 'Auth Key',
             'password' => 'Password',
             'email' => 'Email',
-            'imagen' => 'Imagen',
+            'picture' => 'Imagen',
             'status' => 'Estado',
             'created_at' => 'Fecha de creación',
             'updated_at' => 'Fecha de actualización',
@@ -108,16 +108,16 @@ class UsuarioSignup extends \yii\db\ActiveRecord
             return null;
         }
 
-        $usuario = new User();
-        $usuario->username = $this->username;
-        $usuario->email = $this->email;
-        $usuario->nombre = $this->nombre;
-        $usuario->apellido = $this->apellido;
-        $usuario->imagen = $this->imagen;
-        $usuario->status = $this->status;
-        $usuario->setPassword($this->password);
-        $usuario->generateAuthKey();
+        $user = new User();
+        $user->username = $this->username;
+        $user->email = $this->email;
+        $user->name = $this->name;
+        $user->lastname = $this->lastname;
+        $user->picture = $this->picture;
+        $user->status = $this->status;
+        $user->setPassword($this->password);
+        $user->generateAuthKey();
 
-        return $usuario->save() ? $usuario : null;
+        return $user->save() ? $user : null;
     }
 }

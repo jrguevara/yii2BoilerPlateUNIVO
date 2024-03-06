@@ -15,31 +15,34 @@ use yii\helpers\Html;
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-    <li class="nav-item dropdown user-menu">
+        <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="<?= Yii::$app->request->hostInfo . Yii::$app->user->identity->imagen ?>" class="user-image img-circle elevation-2" alt="User Image">
+                <img src="<?= Yii::$app->request->hostInfo . Yii::$app->user->identity->picture ?>" class="user-image img-circle elevation-2" alt="User Image">
                 <span class="d-none d-md-inline"><?= Yii::$app->user->identity->username ?></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
                 <li class="user-header bg-dark">
-                    <img src="<?= Yii::$app->request->hostInfo . Yii::$app->user->identity->imagen ?>" class="img-circle elevation-2" alt="User Image">
+                    <img src="<?= Yii::$app->request->hostInfo . Yii::$app->user->identity->picture ?>" class="img-circle elevation-2" alt="User Image">
                     <p>
-                        <?= Yii::$app->user->identity->nombre . ' ' . Yii::$app->user->identity->apellido ?>
+                        <?= Yii::$app->user->identity->name . ' ' . Yii::$app->user->identity->lastname ?>
                         <small>
-                                USUARIO
+                            USUARIO
                         </small>
                     </p>
                 </li>
                 <!-- Menu Footer-->
                 <li class="user-footer">
-                    <?= Html::a('Ver Perfil', ['/usuarios/view', 'id_usuario' => Yii::$app->user->identity->id], ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']) ?>
+                    <?= Html::a('Ver Perfil', ['/users/view', 'id_user' => Yii::$app->user->identity->id], ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']) ?>
                     <?= Html::a('Cerrar Sesión', ['/site/logout'], ['data-method' => 'post', 'class' => 'btn btn-default btn-flat float-right']) ?>
                 </li>
             </ul>
         </li>
         <li class="nav-item">
             <?= Html::a('<i class="fas fa-sign-out-alt"></i>', ['/site/logout'], ['data-method' => 'post', 'class' => 'nav-link']) ?>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" id="theme-switch" href="#"><i id="theme-icon" class="fas"></i></a>
         </li>
     </ul>
 </nav>

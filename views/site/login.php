@@ -57,5 +57,4 @@ $this->title = 'Inicio de sesión';
     <li></li>
     <li></li>
     <li></li>
-    <li></li>
 </ul>

@@ -2,11 +2,6 @@
 
 use yii\helpers\Url;
 ?>
-<style>
-    .brand-link {
-        border-bottom: none !important;
-    }
-</style>
 
 <aside class="main-sidebar sidebar-dark-warning elevation-4" style="z-index: 1040 !important;">
     <!-- Brand Logo -->
@@ -103,7 +98,7 @@ use yii\helpers\Url;
                 <!------- FIN MENU #1 ------->
 
                 <!------- MENU USUARIOS ------->
-                <?php if (Yii::$app->controller->id == 'usuarios' || Yii::$app->controller->id == 'route' || Yii::$app->controller->id == 'permission' || Yii::$app->controller->id == 'role' || Yii::$app->controller->id == 'assignment') {
+                <?php if (Yii::$app->controller->id == 'users' || Yii::$app->controller->id == 'route' || Yii::$app->controller->id == 'permission' || Yii::$app->controller->id == 'role' || Yii::$app->controller->id == 'assignment') {
                     $li = "nav-item has-treeview active menu-open";
                     $a = "nav-link active";
                 } else {
@@ -114,7 +109,7 @@ use yii\helpers\Url;
                         <p>Usuarios <i class="right fas fa-angle-left"></i> </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <?php if (Yii::$app->controller->id == 'usuarios' && in_array(\Yii::$app->controller->action->id, ['index', 'signup'])) {
+                        <?php if (Yii::$app->controller->id == 'users' && in_array(\Yii::$app->controller->action->id, ['index', 'signup'])) {
                             $li = "nav-item active";
                             $a = "nav-link active";
                         } else {
@@ -122,7 +117,7 @@ use yii\helpers\Url;
                             $a = "nav-link";
                         }
                         ?>
-                        <li class="<?= $li; ?>"><a class="<?= $a; ?>" href="<?php echo Url::toRoute(['/usuarios/index']); ?>"><i class="nav-icon far fa-circle text-danger"></i>
+                        <li class="<?= $li; ?>"><a class="<?= $a; ?>" href="<?php echo Url::toRoute(['/users/index']); ?>"><i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Gestionar usuarios </p>
                             </a></li>
 

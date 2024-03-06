@@ -9,18 +9,18 @@ use app\models\ErrorLog;
 class CoreController
 {
 /**funcion catch de todas las funciones del controller */
-    public static function getErrorLog($idUsuario, $e, $controlador)
+    public static function getErrorLog($idUser, $e, $controller)
     {
         Yii::$app->getSession()->setFlash('error', "La transaccion no se pudo completar. Intentelo de nuevo o consulte al administrador.");
         Yii::$app->getSession()->setFlash('warning', nl2br(Html::encode($e)));
         //Guardar en bdd
-        //mensaje de error, datetime, IdUsuario, controlador, id de la acción, retornar
+        //mensaje de error, datetime, IdUser, controller, id de la acción, retornar
         $errorLog = new ErrorLog();
-        //$errorLog->mensaje = $e->getMessage();
-        $errorLog->mensaje = nl2br(Html::encode($e));
-        $errorLog->fecha = date("Y-m-d H:i:s");
-        $errorLog->us_id = $idUsuario;
-        $errorLog->controller = $controlador;
+        //$errorLog->message = $e->getMessage();
+        $errorLog->message = nl2br(Html::encode($e));
+        $errorLog->date = date("Y-m-d H:i:s");
+        $errorLog->id_user = $idUser;
+        $errorLog->controller = $controller;
         
         try{
             $errorLog->save();

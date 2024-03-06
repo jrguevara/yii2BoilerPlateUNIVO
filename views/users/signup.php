@@ -27,11 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
             <form role="form">
                 <div class="box-body">
-                    <?= $form->field($model, 'nombre')->textInput(['maxlength' => true, 'autofocus' => true])->label('Nombre') ?>
-                    <?= $form->field($model, 'apellido')->textInput(['maxlength' => true])->label('Apellido') ?>
+                    <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'autofocus' => true])->label('Nombre') ?>
+                    <?= $form->field($model, 'lastname')->textInput(['maxlength' => true])->label('Apellido') ?>
                     <?= $form->field($model, 'username')->textInput(['maxlength' => true])->label('Nombre de usuario') ?>
                     <?= $form->field($model, 'email') ?>
-                    <?= $form->field($model, 'imagen')->label('Imagen')->widget(FileInput::class, [
+                    <?= $form->field($model, 'picture')->label('Avatar')->widget(FileInput::class, [
                         'options' => ['accept' => 'image/*'],
                         'pluginOptions' => ['allowedFileExtensions' => ['jpg', 'gif', 'png'],],
                     ]); ?>

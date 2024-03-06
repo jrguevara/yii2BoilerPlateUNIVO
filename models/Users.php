@@ -5,35 +5,35 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "tbl_usuarios".
+ * This is the model class for table "users".
  *
- * @property int $id_usuario
+ * @property int $id_user
  * @property string $username
- * @property string $nombre
- * @property string $apellido
+ * @property string $name
+ * @property string $lastname
  * @property string $auth_key
  * @property string $password_hash
  * @property string|null $password_reset_token
  * @property string $email
- * @property string|null $imagen
+ * @property string|null $picture
  * @property int $status
  * @property int $created_at
  * @property int $updated_at
  * @property string|null $verification_token
  */
-class Usuarios extends \yii\db\ActiveRecord
+class Users extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'tbl_usuarios';
+        return 'users';
     }
 
-    public function getNombreCompleto()
+    public function getFullName()
     {
-        return $this->nombre . ' ' . $this->apellido;
+        return $this->name . ' ' . $this->lastname;
     }
 
     /**
@@ -42,9 +42,9 @@ class Usuarios extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'nombre', 'apellido', 'auth_key', 'email', 'created_at', 'updated_at'], 'required'],
+            [['username', 'name', 'lastname', 'auth_key', 'email', 'created_at', 'updated_at'], 'required'],
             [['status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'nombre', 'apellido', 'password_hash', 'email', 'imagen' ], 'string', 'max' => 255],
+            [['username', 'name', 'lastname', 'password_hash', 'email', 'picture' ], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
             [['email'], 'unique'],
@@ -57,14 +57,14 @@ class Usuarios extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_usuario' => 'Id',
+            'id_user' => 'Id',
             'username' => 'Usuario',
-            'nombre' => 'Nombre',
-            'apellido' => 'Apellido',
+            'name' => 'Nombre',
+            'lastname' => 'Apellido',
             'auth_key' => 'Auth Key',
             'password_hash' => 'Password',
             'email' => 'Email',
-            'imagen' => 'Imagen',
+            'picture' => 'Avatar',
             'status' => 'Estado',
             'created_at' => 'Fecha de creación',
             'updated_at' => 'Fecha de actualización',
