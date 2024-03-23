@@ -76,3 +76,7 @@ composer.lock
 ehthumbs.db
 Thumbs.db
 .htaccess
+
+# ENV files #
+######################
+.env

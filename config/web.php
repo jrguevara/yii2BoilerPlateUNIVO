@@ -24,7 +24,7 @@ $config = [
             //'defaultRoles' => ['guest', 'user'],
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\UserIdentity',
             'enableAutoLogin' => false,
             'enableSession' => true,
             'authTimeout' => 3600,
@@ -59,6 +59,12 @@ $config = [
                 // ...
             ],
         ],
+        'cloudinary' => [
+            'class' => 'app\Components\CloudinaryComponent',
+            'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+            'api_key' => env('CLOUDINARY_API_KEY'),
+            'api_secret' => env('CLOUDINARY_API_SECRET'),
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -79,6 +85,10 @@ $config = [
         ],
         'rbac' => [
             'class' => 'yii2mod\rbac\Module',
+            'viewPath' => '@app/modules/users/views/rbac'
+        ],
+        'users' => [
+            'class' => 'app\modules\users\Users',
         ],
     ],
     'params' => $params,
@@ -87,6 +97,7 @@ $config = [
         'allowActions' => [
             'site/login',
             'site/logout',
+            //'users/*',
             //'paciente/*',
             //'site/*',
             //'admin/*',

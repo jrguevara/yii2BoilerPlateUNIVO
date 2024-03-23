@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <table class="table table-sm table-striped table-hover table-bordered">
                     <tr>
                         <td width="150px" rowspan="9">
-                        <img src="<?= Yii::$app->request->hostInfo . $model->picture ?>" width="150" />
+                        <img src="<?= $model->picture ?>" width="150" />
                         </td>
                         <td width="200px"><b>Usuario:</b></td>
                         <td><?= $model->username ?></td>

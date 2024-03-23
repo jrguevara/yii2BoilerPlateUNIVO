@@ -8,9 +8,9 @@ use yii\bootstrap4\ActiveForm;
 
 $this->title = 'Inicio de sesión';
 ?>
-<div class="card">
-    <div class="card-body login-card-body">
-        <p class="login-box-msg"><b>Inicio de sesión</b></p>
+<div class="card text-white bg-dark mb-3">
+    <div class="card-body">
+        <h2 class="login-box-msg">Inicio de sesión</h2>
 
         <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
@@ -47,14 +47,3 @@ $this->title = 'Inicio de sesión';
     </div>
 
 </div>
-<ul class="bg-bubbles">
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-</ul>

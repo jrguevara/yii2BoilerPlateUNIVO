@@ -1,12 +1,12 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\users\controllers;
 
 use Yii;
-use app\models\Users;
-use app\models\UserSignup;
+use app\modules\users\models\Users;
+use app\modules\users\models\UserRegister;
 use yii\filters\VerbFilter;
-use app\models\UsersSearch;
+use app\modules\users\models\UsersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
@@ -70,7 +70,7 @@ class UsersController extends Controller
      */
     public function actionCreate()
     {
-        $model = new UserSignup();
+        $model = new UserRegister();
 
         if ($model->load(Yii::$app->request->post())) {
             $upload = UploadedFile::getInstance($model, 'picture');
@@ -108,22 +108,22 @@ class UsersController extends Controller
     {
         $model = $this->findModel($id_user);
 
-        $j = $model->password_hash;   
-        
-        if ($model->load(Yii::$app->request->post())) {
-                // maybe remove this if to get URL of image from callback
-            $upload = UploadedFile::getInstance($model, 'picture');
+        $j = $model->password_hash;
 
-            if (empty($upload)) {
+        if ($model->load(Yii::$app->request->post())) {
+            $picture = UploadedFile::getInstance($model, 'picture');
+            $folder = 'yii2/avatars';
+
+            if (empty($picture)) {
                 $model->picture = $_POST['Users']['picture'];
             } else {
-                $tmp = explode(".", $upload->name);
-                $ext = end($tmp);
-                $name = Yii::$app->security->generateRandomString() . ".{$ext}";
-                $path = Yii::$app->basePath . '/web/avatars/' . $name;
-                $path2 = Yii::$app->request->baseUrl . '/avatars/' . $name;;
-                $model->picture = $path2;
-                $upload->saveAs($path);
+                try {
+                    $url = Yii::$app->cloudinary->upload($picture->tempName,$folder);
+
+                    $model->picture = $url;
+                } catch (\Exception $e) {
+                    Yii::$app->session->setFlash('error', $e->getMessage());
+                }
             }
 
             $i = $_POST['Users']['password_hash'];

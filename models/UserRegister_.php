@@ -21,7 +21,7 @@ use app\models\User;
  * @property int $created_at
  * @property int $updated_at
  */
-class userSignup extends \yii\db\ActiveRecord
+class userRegister extends \yii\db\ActiveRecord
 {
 
     public $username;

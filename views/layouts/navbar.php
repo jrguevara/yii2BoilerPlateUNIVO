@@ -17,13 +17,13 @@ use yii\helpers\Html;
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="<?= Yii::$app->request->hostInfo . Yii::$app->user->identity->picture ?>" class="user-image img-circle elevation-2" alt="User Image">
+                <img src="<?= Yii::$app->user->identity->picture ?>" class="user-image img-circle elevation-2" alt="User Image">
                 <span class="d-none d-md-inline"><?= Yii::$app->user->identity->username ?></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
                 <li class="user-header bg-dark">
-                    <img src="<?= Yii::$app->request->hostInfo . Yii::$app->user->identity->picture ?>" class="img-circle elevation-2" alt="User Image">
+                    <img src="<?= Yii::$app->user->identity->picture ?>" class="img-circle elevation-2" alt="User Image">
                     <p>
                         <?= Yii::$app->user->identity->name . ' ' . Yii::$app->user->identity->lastname ?>
                         <small>
