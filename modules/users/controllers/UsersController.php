@@ -74,17 +74,18 @@ class UsersController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $upload = UploadedFile::getInstance($model, 'picture');
+            $folder = 'yii2/avatars';
             if (empty($upload)) {
                 $name = $this->request->baseUrl . '/avatars/default.png';
                 $model->picture = $name;
             } else {
-                $tmp = explode(".", $upload->name);
-                $ext = end($tmp);
-                $name = Yii::$app->security->generateRandomString() . ".{$ext}";
-                $path = Yii::$app->basePath . '/web/avatars/' . $name;
-                $path2 = Yii::$app->request->baseUrl . '/avatars/' . $name;
-                $model->picture = $path2;
-                $upload->saveAs($path);
+                try {
+                    $url = Yii::$app->cloudinary->upload($upload->tempName, $folder);
+
+                    $model->picture = $url;
+                } catch (\Exception $e) {
+                    Yii::$app->session->setFlash('error', $e->getMessage());
+                }
             }
             if ($model->signup()) { {
                     return $this->redirect(['index']);
@@ -108,17 +109,17 @@ class UsersController extends Controller
     {
         $model = $this->findModel($id_user);
 
-        $j = $model->password_hash;
+        //$j = $model->password_hash;
 
         if ($model->load(Yii::$app->request->post())) {
-            $picture = UploadedFile::getInstance($model, 'picture');
+            $ipload = UploadedFile::getInstance($model, 'picture');
             $folder = 'yii2/avatars';
 
-            if (empty($picture)) {
-                $model->picture = $_POST['Users']['picture'];
+            if (empty($upload)) {
+                $model->picture = $model->getOldAttribute('picture');
             } else {
                 try {
-                    $url = Yii::$app->cloudinary->upload($picture->tempName,$folder);
+                    $url = Yii::$app->cloudinary->upload($upload->tempName, $folder);
 
                     $model->picture = $url;
                 } catch (\Exception $e) {
@@ -126,15 +127,13 @@ class UsersController extends Controller
                 }
             }
 
-            $i = $_POST['Users']['password_hash'];
-            if (empty($i)) {
-                $model->password_hash = $j;
-            } else {
-                $new_password = Yii::$app->security->generatePasswordHash($i);
-                $model->password_hash = $new_password;
-            }
+            $pass = $_POST['Users']['password'];
 
+            if (isset($pass)) {
+                $model->password_hash = Yii::$app->security->generatePasswordHash($_POST['Users']['password']);
+            }
             $model->save();
+
             return $this->redirect(['view', 'id_user' => $model->id_user]);
         } else {
             return $this->render('update', [

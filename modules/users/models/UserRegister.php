@@ -5,7 +5,7 @@ namespace app\modules\users\models;
 
 use Yii;
 use yii\base\Model;
-use app\models\User;
+use app\models\UserIdentity;
 
 /**
  * This is the model class for table "users".
@@ -50,7 +50,7 @@ class userRegister extends \yii\db\ActiveRecord
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\app\models\User', 'message' => 'Nombre de user ya existe.'],
+            ['username', 'unique', 'targetClass' => '\app\models\UserIdentity', 'message' => 'Nombre de usuario ya existe.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['name', 'trim'],
@@ -59,7 +59,7 @@ class userRegister extends \yii\db\ActiveRecord
 
             ['lastname', 'trim'],
             ['lastname', 'required'],
-            ['ñastname', 'string', 'min' => 2, 'max' => 255],
+            ['lastname', 'string', 'min' => 2, 'max' => 255],
 
             [['picture'], 'safe'],
             [['picture'], 'file', 'extensions' => 'jpg, gif, png'],
@@ -69,7 +69,7 @@ class userRegister extends \yii\db\ActiveRecord
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\app\models\User', 'message' => 'Direccion de correo ya existe.'],
+            ['email', 'unique', 'targetClass' => '\app\models\UserIdentity', 'message' => 'Direccion de correo ya existe.'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
@@ -109,7 +109,7 @@ class userRegister extends \yii\db\ActiveRecord
             return null;
         }
 
-        $user = new User();
+        $user = new UserIdentity();
         $user->username = $this->username;
         $user->email = $this->email;
         $user->name = $this->name;

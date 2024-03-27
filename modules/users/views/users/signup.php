@@ -1,25 +1,14 @@
 <?php
 
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \frontend\models\SignupForm */
-
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\widgets\SwitchInput;
 use kartik\widgets\FileInput;
-use yii\helpers\ArrayHelper;
 
 $this->title = 'Nuevo usuario';
 $this->params['breadcrumbs'][] = ['label' => 'Listado de Usuarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<!-- <h1><?php //echo Yii::$app->basePath; 
-            ?></h1>
-<h1><?php //echo Yii::$app->request->hostInfo; 
-    ?></h1>
-<h1><?php //echo Yii::$app->request->baseUrl; 
-    ?></h1> -->
 
 <div class="row">
     <div class="col-md-12">
