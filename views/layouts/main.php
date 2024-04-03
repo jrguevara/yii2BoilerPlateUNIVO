@@ -4,55 +4,20 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+use app\assets\AppAsset;
 
 \hail812\adminlte3\assets\FontAwesomeAsset::register($this);
 \hail812\adminlte3\assets\AdminLteAsset::register($this);
+
 $this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
-
+AppAsset::register($this);
 $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
-
 $publishedRes = Yii::$app->assetManager->publish('@vendor/hail812/yii2-adminlte3/src/web/js');
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
-<style>
-    .brand-link {
-        border-bottom: none !important;
-    }
-
-    .sidebar-dark-warning .nav-sidebar>.nav-item>.nav-link.active,
-    .sidebar-light-warning .nav-sidebar>.nav-item>.nav-link.active {
-        background-color: #ffc107 !important;
-        color: #000 !important;
-    }
-
-    .nav-item>.nav-link.active {
-        /*background-color: #332940 !important;*/
-        background-color: #000 !important;
-        color: #fff !important;
-    }
-
-    .elevation-4 {
-        box-shadow: none !important;
-    }
-
-    .dark-mode .kv-table-header {
-        background-image: none !important;
-    }
-
-    .dark-mode .kv-panel-before {
-        border-bottom-color: #6c757d !important;
-    }
-
-    .dark-mode .kv-panel-after {
-        border-top-color: #6c757d !important;
-    }
-
-    .dark-mode .bg-dark {
-        background-color: #000 !important;
-    }
-</style>
 
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
@@ -89,54 +54,6 @@ $publishedRes = Yii::$app->assetManager->publish('@vendor/hail812/yii2-adminlte3
 
     <?php $this->endBody() ?>
 </body>
-<script type="text/javascript">
-    //? Recobra el estado del left menu
-    (function() {
-        if (Boolean(localStorage.getItem('sidebar-toggle-collapsed'))) {
-            var body = document.getElementsByTagName('body')[0];
-            body.className = body.className + ' sidebar-collapse';
-        }
-    })();
-
-    (function() {
-        //? Guarda en localStorage el estado de left menu
-        $('#hamburger').click(function(event) {
-            event.preventDefault();
-            if (Boolean(localStorage.getItem('sidebar-toggle-collapsed'))) {
-                localStorage.setItem('sidebar-toggle-collapsed', '');
-            } else {
-                localStorage.setItem('sidebar-toggle-collapsed', '1');
-            }
-        });
-    })();
-
-    //? Recobra el estado del tema (claro-oscuro)
-    (function() {
-        if (Boolean(localStorage.getItem('dark-mode-enable'))) {
-            var body = document.getElementsByTagName('body')[0];
-            body.className = body.className + ' dark-mode';
-            var i = document.getElementById('theme-icon');
-            i.className = i.className + ' fa-sun';
-        } else {
-            var i = document.getElementById('theme-icon');
-            i.className = i.className + ' fa-moon';
-        }
-    })();
-
-    (function() {
-        //? Guarda en localStorage el estado del tema
-        $('#theme-switch').click(function(event) {
-            event.preventDefault();
-            if (Boolean(localStorage.getItem('dark-mode-enable'))) {
-                localStorage.setItem('dark-mode-enable', '');
-                location.reload();
-            } else {
-                localStorage.setItem('dark-mode-enable', '1');
-                location.reload();
-            }
-        });
-    })();
-</script>
 
 </html>
 <?php $this->endPage() ?>

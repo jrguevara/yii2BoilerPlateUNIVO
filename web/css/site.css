@@ -1,103 +1,71 @@
-main > .container {
-    padding: 70px 15px 20px;
+.dark-mode .content-wrapper {
+  background-color: #242627 !important;
+  color: #fff !important;
 }
 
-.footer {
-    background-color: #f5f5f5;
-    font-size: .9em;
-    height: 60px;
+.brand-link {
+  border-bottom: none !important;
 }
 
-.footer > .container {
-    padding-right: 15px;
-    padding-left: 15px;
+.sidebar-dark-warning .nav-sidebar > .nav-item > .nav-link.active,
+.sidebar-light-warning .nav-sidebar > .nav-item > .nav-link.active {
+  background-color: #ffc107 !important;
+  color: #000 !important;
 }
 
-.not-set {
-    color: #c55;
-    font-style: italic;
+.nav-item > .nav-link.active {
+  /*background-color: #332940 !important;*/
+  background-color: #000 !important;
+  color: #fff !important;
 }
 
-/* add sorting icons to gridview sort links */
-a.asc:after, a.desc:after {
-    content: '';
-    left: 3px;
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border: solid 5px transparent;
-    margin: 4px 4px 2px 4px;
-    background: transparent;
+.elevation-4 {
+  box-shadow: none !important;
 }
 
-a.asc:after {
-    border-bottom: solid 7px #212529;
-    border-top-width: 0;
+.dark-mode,
+.kv-table-header {
+  background-image: none !important;
 }
 
-a.desc:after {
-    border-top: solid 7px #212529;
-    border-bottom-width: 0;
+.dark-mode .kv-panel-before,
+.dark-mode .kv-panel-after {
+  border-color: #5a5a5a !important;
+  background-color: #17191a !important;
 }
 
-.grid-view th {
-    white-space: nowrap;
+.dark-mode .card-footer,
+.dark-mode .card-body {
+  background-color: #17191a !important;
 }
 
-.hint-block {
-    display: block;
-    margin-top: 5px;
-    color: #999;
+.dark-mode .kv-grid-table {
+  background-color: #17191a !important;
 }
 
-.error-summary {
-    color: #a94442;
-    background: #fdf7f7;
-    border-left: 3px solid #eed3d7;
-    padding: 10px 20px;
-    margin: 0 0 15px 0;
+.dark-mode .bg-dark {
+  background-color: #000 !important;
 }
 
-/* align the logout "link" (button in form) of the navbar */
-.nav li > form > button.logout {
-    padding-top: 7px;
-    color: rgba(255, 255, 255, 0.5);
+.dark-mode .main-header,
+.dark-mode .main-sidebar,
+.dark-mode .main-footer {
+  background-color: #17191a !important;
+  border: none !important;
 }
 
-@media(max-width:767px) {
-    .nav li > form > button.logout {
-        display:block;
-        text-align: left;
-        width: 100%;
-        padding: 10px 0;
-    }
+.dark-mode .table td,
+.dark-mode .table th {
+  border-color: #5a5a5a !important;
 }
 
-.nav > li > form > button.logout:focus,
-.nav > li > form > button.logout:hover {
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.75);
+.dark-mode .card-dark.card-outline {
+  border-top: 3px solid #a0a0a0;
 }
 
-.nav > li > form > button.logout:focus {
-    outline: none;
+.center-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
-
-    .brand-link {
-        border-bottom: none !important;
-    }
-
-    .sidebar-dark-warning .nav-sidebar>.nav-item>.nav-link.active,
-    .sidebar-light-warning .nav-sidebar>.nav-item>.nav-link.active {
-        background-color: #ffc107 !important;
-        color: #000 !important;
-    }
-    .nav-item>.nav-link.active {
-        /*background-color: #332940 !important;*/
-        background-color: #000 !important;
-        color: #fff !important;
-    }
-
-    .elevation-4 {
-        box-shadow: none !important;
-    }

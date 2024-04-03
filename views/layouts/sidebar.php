@@ -57,30 +57,6 @@ use yii\helpers\Url;
                                 <p>Ejemplo de Echo</p>
                             </a></li>
                         <!-------------------------------------------------->
-                        <?php if (Yii::$app->controller->id == 'inicio' && in_array(\Yii::$app->controller->action->id, ['suma'])) {
-                            $li = "nav-item active";
-                            $a = "nav-link active";
-                        } else {
-                            $li = "nav-item";
-                            $a = "nav-link";
-                        }
-                        ?>
-                        <li class="<?= $li; ?>"><a class="<?= $a; ?>" href="<?php echo Url::toRoute(['/inicio/suma']); ?>"><i class="nav-icon far fa-circle text-red"></i>
-                                <p>Ejemplo de Suma</p>
-                            </a></li>
-                        <!-------------------------------------------------->
-                        <?php if (Yii::$app->controller->id == 'inicio' && in_array(\Yii::$app->controller->action->id, ['resta'])) {
-                            $li = "nav-item active";
-                            $a = "nav-link active";
-                        } else {
-                            $li = "nav-item";
-                            $a = "nav-link";
-                        }
-                        ?>
-                        <li class="<?= $li; ?>"><a class="<?= $a; ?>" href="<?php echo Url::toRoute(['/inicio/resta']); ?>"><i class="nav-icon far fa-circle text-green"></i>
-                                <p>Ejemplo de Resta</p>
-                            </a></li>
-                        <!-------------------------------------------------->
                         <?php if (Yii::$app->controller->id == 'categorias' && in_array(\Yii::$app->controller->action->id, ['index'])) {
                             $li = "nav-item active";
                             $a = "nav-link active";
@@ -109,18 +85,6 @@ use yii\helpers\Url;
                         <p>Usuarios <i class="right fas fa-angle-left"></i> </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <?php if (Yii::$app->controller->id == 'user' && in_array(\Yii::$app->controller->action->id, ['index', 'signup'])) {
-                            $li = "nav-item active";
-                            $a = "nav-link active";
-                        } else {
-                            $li = "nav-item";
-                            $a = "nav-link";
-                        }
-                        ?>
-                        <li class="<?= $li; ?>"><a class="<?= $a; ?>" href="<?php echo Url::toRoute(['/users/index']); ?>"><i class="nav-icon far fa-circle text-danger"></i>
-                                <p>Gestionar usuarios </p>
-                            </a></li>
-
                         <!-------------------------------------------------->
                         <?php if (Yii::$app->controller->id == 'users' && in_array(\Yii::$app->controller->action->id, ['index', 'view', 'create', 'update'])) {
                             $li = "nav-item active";
@@ -134,7 +98,6 @@ use yii\helpers\Url;
                                 <p>Gestionar Usuarios</p>
                             </a></li>
                         <!-------------------------------------------------->
-
                         <?php if (Yii::$app->controller->id == 'route' && in_array(\Yii::$app->controller->action->id, ['index'])) {
                             $li = "nav-item active";
                             $a = "nav-link active";
@@ -206,7 +169,7 @@ use yii\helpers\Url;
                             $a = "nav-link";
                         }
                         ?>
-                        <li class="<?= $li; ?>"><a class="<?= $a; ?>" href="<?php echo Url::toRoute(['/gii']); ?>"><i class="nav-icon far fa-circle text-danger"></i>
+                        <li class="<?= $li; ?>"><a class="<?= $a; ?>" href="<?php echo Url::toRoute(['/gii']); ?>" target="_blank"><i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Gii </p>
                             </a></li>
 
@@ -218,7 +181,7 @@ use yii\helpers\Url;
                             $a = "nav-link";
                         }
                         ?>
-                        <li class="<?= $li; ?>"><a class="<?= $a; ?>" href="<?php echo Url::toRoute(['/debug']); ?>"><i class="nav-icon far fa-circle text-blue"></i>
+                        <li class="<?= $li; ?>"><a class="<?= $a; ?>" href="<?php echo Url::toRoute(['/debug']); ?>" target="_blank"><i class="nav-icon far fa-circle text-blue"></i>
                                 <p>Debug </p>
                             </a></li>
                     </ul>

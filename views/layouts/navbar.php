@@ -33,7 +33,7 @@ use yii\helpers\Html;
                 </li>
                 <!-- Menu Footer-->
                 <li class="user-footer">
-                    <?= Html::a('Ver Perfil', ['users/users/view', 'id_user' => Yii::$app->user->identity->id], ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']) ?>
+                    <?= Html::a('Ver Perfil', ['/users/users/view', 'id_user' => Yii::$app->user->identity->id], ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']) ?>
                     <?= Html::a('Cerrar Sesión', ['/site/logout'], ['data-method' => 'post', 'class' => 'btn btn-default btn-flat float-right']) ?>
                 </li>
             </ul>

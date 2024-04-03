@@ -22,6 +22,10 @@ class CoreController
         $errorLog->id_user = $idUser;
         $errorLog->controller = $controller;
         
+        echo "<pre>";
+        print_r($errorLog);
+        echo "</pre>";
+       // die();
         try{
             $errorLog->save();
         }

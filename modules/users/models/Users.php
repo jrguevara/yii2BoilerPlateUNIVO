@@ -49,8 +49,6 @@ class Users extends \yii\db\ActiveRecord
             [['status', 'created_at', 'updated_at'], 'integer'],
             [['username', 'name', 'lastname', 'password_hash', 'email', 'picture' ], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
-            ['username', 'unique', 'targetClass' => '\app\models\UserIdentity', 'message' => 'Nombre de usuario ya existe.'],
-            ['email', 'unique', 'targetClass' => '\app\models\UserIdentity', 'message' => 'Direccion de correo ya existe.'],
         ];
     }
 

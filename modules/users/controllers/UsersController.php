@@ -112,7 +112,7 @@ class UsersController extends Controller
         //$j = $model->password_hash;
 
         if ($model->load(Yii::$app->request->post())) {
-            $ipload = UploadedFile::getInstance($model, 'picture');
+            $upload = UploadedFile::getInstance($model, 'picture');
             $folder = 'yii2/avatars';
 
             if (empty($upload)) {
@@ -133,7 +133,7 @@ class UsersController extends Controller
                 $model->password_hash = Yii::$app->security->generatePasswordHash($_POST['Users']['password']);
             }
             $model->save();
-
+            Yii::$app->session->setFlash('info', "Registro actualizado exitosamente.");
             return $this->redirect(['view', 'id_user' => $model->id_user]);
         } else {
             return $this->render('update', [
