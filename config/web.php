@@ -24,7 +24,7 @@ $config = [
             //'defaultRoles' => ['guest', 'user'],
         ],
         'user' => [
-            'identityClass' => 'app\models\UserIdentity',
+            'identityClass' => 'app\models\User',
             'enableAutoLogin' => false,
             'enableSession' => true,
             'authTimeout' => 3600,

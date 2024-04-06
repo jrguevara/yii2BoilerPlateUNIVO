@@ -134,7 +134,7 @@ use yii\helpers\Url;
                                 <p>Gestionar roles </p>
                             </a></li>
 
-                        <?php if (Yii::$app->controller->id == 'assignment' && in_array(\Yii::$app->controller->action->id, ['index'])) {
+                        <?php if (Yii::$app->controller->id == 'assignment' && in_array(\Yii::$app->controller->action->id, ['index', 'view', 'create', 'update'])) {
                             $li = "nav-item active";
                             $a = "nav-link active";
                         } else {

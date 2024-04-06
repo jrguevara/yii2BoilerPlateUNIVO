@@ -11,7 +11,7 @@ RbacAsset::register($this);
 /* @var $usernameField string */
 
 $userName = $model->user->{$usernameField};
-$this->title = Yii::t('yii2mod.rbac', 'Assignment : {0}', $userName);
+$this->title = Yii::t('yii2mod.rbac', 'Asignación de rol a usuario: {0}', $userName);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('yii2mod.rbac', 'Assignments'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $userName;
 $this->render('/layouts/_sidebar');
