@@ -37,7 +37,7 @@ commands/
 /vagrant
 /vendor
 composer.lock
-web/assets/
+web/assets/*
 
 # Compiled source #
 ###################
