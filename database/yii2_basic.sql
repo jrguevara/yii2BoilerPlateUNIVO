@@ -1,28 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
---
--- Host: localhost:8889
--- Generation Time: Feb 23, 2024 at 01:12 AM
--- Server version: 5.7.39
--- PHP Version: 8.2.0
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `yii2_basic`
---
-
--- --------------------------------------------------------
-
 --
 -- Table structure for table `auth_assignment`
 --
@@ -38,8 +13,8 @@ CREATE TABLE `auth_assignment` (
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-('Administrador', '1', 1677807726),
-('DemoRol', '2', 1677807737);
+('AdminRol', '1', 1677807726),
+('UsuarioRol', '2', 1677807737);
 
 -- --------------------------------------------------------
 
@@ -67,11 +42,13 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 ('/gridview/*', 2, NULL, NULL, NULL, 1677807174, 1677807174),
 ('/rbac/*', 2, NULL, NULL, NULL, 1677807195, 1677807195),
 ('/site/*', 2, NULL, NULL, NULL, 1677807256, 1677807256),
-('/users/*', 2, NULL, NULL, NULL, 1677807263, 1677807263),
-('Administrador', 1, 'Rol de Administrador del sistema', NULL, NULL, 1677807604, 1677807684),
-('DemoRol', 1, 'Rol para demosntacion', NULL, NULL, 1677807665, 1677807665),
-('PermisoAdmin', 2, 'Este es el permiso para el administrador', NULL, NULL, 1677807368, 1677807368),
-('PermisoDemo', 2, 'Este es un permiso para DEmostracion', NULL, NULL, 1677807505, 1677807505);
+('/users/*', 2, NULL, NULL, NULL, 1711184695, 1711184695),
+('/users/users/update', 2, NULL, NULL, NULL, 1711532792, 1711532792),
+('/users/users/view', 2, NULL, NULL, NULL, 1711532786, 1711532786),
+('AdminRol', 1, 'Rol para Administradores del sistema', NULL, NULL, 1677807604, 1712393101),
+('PermisoAdmin', 2, 'Permiso para roles de Administrador', NULL, NULL, 1677807368, 1712392943),
+('PermisoUsuario', 2, 'Permiso para roles de usuario', NULL, NULL, 1677807505, 1712392977),
+('UsuarioRol', 1, 'Rol para usuarios del sistema', NULL, NULL, 1677807665, 1712393075);
 
 -- --------------------------------------------------------
 
@@ -92,13 +69,15 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 ('PermisoAdmin', '/debug/*'),
 ('PermisoAdmin', '/gii/*'),
 ('PermisoAdmin', '/gridview/*'),
-('PermisoDemo', '/gridview/*'),
+('PermisoUsuario', '/gridview/*'),
 ('PermisoAdmin', '/rbac/*'),
 ('PermisoAdmin', '/site/*'),
-('PermisoDemo', '/site/*'),
+('PermisoUsuario', '/site/*'),
 ('PermisoAdmin', '/users/*'),
-('Administrador', 'PermisoAdmin'),
-('DemoRol', 'PermisoDemo');
+('PermisoUsuario', '/users/users/update'),
+('PermisoUsuario', '/users/users/view'),
+('AdminRol', 'PermisoAdmin'),
+('UsuarioRol', 'PermisoUsuario');
 
 -- --------------------------------------------------------
 
@@ -169,8 +148,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `username`, `name`, `lastname`, `auth_key`, `password_hash`, `email`, `picture`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'Admin', 'Admin', 'AxK42pI4nqEvIyBOBUJVfSR9oRTq-chL', '$2y$13$vfsku0ucja/nzCddYYjL3upKL9uDe/gUyNXK0gqTX0eJ7nFTRIrEu', 'admin@outlook.com', '/avatars/6_iFu3jKc-1Qmp51WicY_bb5mzyGBqT5.gif', 1, 1677203598, 1677203598),
-(2, 'demo', 'demo', 'demo', '_LDZ2AUvtDDoy36zC6bJhNgJRM9rYO3D', '$2y$13$hGFn5B62kUT0kmTZtQS8We5sIj0vsg1mDH/dyf/j1tZVatVcD4khi', 'demo@outlook.com', '/avatars/default.png', 1, 1677203935, 1677203935);
+(1, 'admin', 'Admin', 'Administrador', 'AxK42pI4nqEvIyBOBUJVfSR9oRTq-chL', '$2y$13$0rNFkKca0Vbo8K1XK1gtoeysY4lS4rg3RrycanNNCxilHlXGHfChm', 'admin@email.com', '/avatars/default.png', 1, 1677203598, 1677203598),
+(2, 'usuario', 'usuario', 'registrado', '_LDZ2AUvtDDoy36zC6bJhNgJRM9rYO3D', '$2y$13$t.6BcOSVcwwYyX3vtLA7LOh9LG7FOvGEbCkSS.QpT7xpmhTij56Y6', 'usuario@email.com', '/avatars/default.png', 1, 1677203935, 1677203935);
 
 --
 -- Indexes for dumped tables
@@ -231,6 +210,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `error_log`
+--
+ALTER TABLE `error_log`
+  MODIFY `id_error_log` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -270,8 +255,3 @@ ALTER TABLE `error_log`
 --
 ALTER TABLE `log`
   ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

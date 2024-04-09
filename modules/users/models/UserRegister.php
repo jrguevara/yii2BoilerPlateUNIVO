@@ -5,7 +5,7 @@ namespace app\modules\users\models;
 
 use Yii;
 use yii\base\Model;
-use app\models\UserIdentity;
+use app\models\User;
 
 /**
  * This is the model class for table "users".
@@ -14,7 +14,6 @@ use app\models\UserIdentity;
  * @property string $username
  * @property string $name
  * @property string $lastname
- * @property string $auth_key
  * @property string $password_hash
  * @property string $email
  * @property string|null $picture
@@ -32,7 +31,6 @@ class userRegister extends \yii\db\ActiveRecord
     public $status;
     public $picture;
     public $password;
-    public $authKey;
 
     /**
      * {@inheritdoc}
@@ -88,7 +86,6 @@ class userRegister extends \yii\db\ActiveRecord
             'username' => 'user',
             'name' => 'Nombre',
             'lastname' => 'Apellido',
-            'auth_key' => 'Auth Key',
             'password' => 'Password',
             'email' => 'Email',
             'picture' => 'Imagen',
@@ -109,7 +106,7 @@ class userRegister extends \yii\db\ActiveRecord
             return null;
         }
 
-        $user = new UserIdentity();
+        $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
         $user->name = $this->name;
