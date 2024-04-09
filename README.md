@@ -67,6 +67,26 @@ return [
 ];
 ```
 
+Cree una base de datos con el nombre que desee y luego utilice el script de instalacion de base de datos que se encuentra en la carpeta `database` para crear las tablas necesarias.
+
+### Usuarios
+El script de instalacion de base de datos crea un usuario con el rol de administrador con los siguientes datos:
+- Usuario: admin
+- Contraseña: 123456
+
+Tambien se crea un usuario con el rol de usuario registrado con los siguientes datos:
+- Usuario: usuario
+- Contraseña: 123456
+
+### Cloudinary
+Para subir imagenes a Cloudinary, es necesario crear una cuenta en [https://cloudinary.com](https://cloudinary.com) y obtener las credenciales de la cuenta, luego crear el archivo `.env` en la raiz del proyecto con las variables de entorno y datos reales, por ejemplo:
+
+```env
+CLOUDINARY_CLOUD_NAME = 'tu_cloud_name'
+CLOUDINARY_API_KEY = 'tu_api_key'
+CLOUDINARY_API_SECRET = 'tu_api_secret'
+```
+
 ## LICENCIA Y DISTRIBUCION
 
 Este proyecto es de uso libre y puede ser distribuido y modificado por cualquier persona. Para mas informacion, por favor lea el archivo [LICENSE.md](LICENSE.md).
