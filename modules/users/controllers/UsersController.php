@@ -129,7 +129,7 @@ class UsersController extends Controller
 
             $pass = $_POST['Users']['password'];
 
-            if (isset($pass)) {
+            if (!empty($pass)) {
                 $model->password_hash = Yii::$app->security->generatePasswordHash($_POST['Users']['password']);
             }
             $model->save();
